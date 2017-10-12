@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ChartProgressBar_ios" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
+                        <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9zo-tr-M5I" customClass="ChartProgressBar" customModule="ChartProgressBar_ios" customModuleProvider="target">
+                                <rect key="frame" x="4.5" y="240" width="366" height="187"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="187" id="IBm-pG-ekc"/>
+                                    <constraint firstAttribute="width" constant="366" id="RD9-vL-ogI"/>
+                                </constraints>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Byo-bp-YNv">
+                                <rect key="frame" x="218" y="572" width="136" height="80"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="e1x-l9-DCy">
+                                        <rect key="frame" x="0.0" y="0.0" width="136" height="42"/>
+                                        <state key="normal" title="Reset Values"/>
+                                        <connections>
+                                            <action selector="resetValues:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nAa-od-iqc"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QAC-0l-iTj">
+                                        <rect key="frame" x="0.0" y="50" width="136" height="30"/>
+                                        <state key="normal" title="Remove Clicked bar"/>
+                                        <connections>
+                                            <action selector="removeClickedBar:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vFC-MH-Hkm"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="7VT-o0-mEd"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="jIU-jQ-Y0r">
+                                <rect key="frame" x="21" y="572" width="136" height="80"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CYT-np-Iw7">
+                                        <rect key="frame" x="0.0" y="0.0" width="136" height="42"/>
+                                        <state key="normal" title="Remove Values"/>
+                                        <connections>
+                                            <action selector="removeValues:" destination="BYZ-38-t0r" eventType="touchUpInside" id="1aE-Vr-gCT"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ati-1k-mbF">
+                                        <rect key="frame" x="0.0" y="50" width="136" height="30"/>
+                                        <state key="normal" title="isBarsEmpty ?"/>
+                                        <connections>
+                                            <action selector="isBarsEmpty:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ngF-s9-MFD"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="80" id="12a-mF-osY"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Byo-bp-YNv" secondAttribute="bottom" constant="15" id="C9k-fd-5b5"/>
+                            <constraint firstItem="jIU-jQ-Y0r" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="5" id="Lxg-Fj-tN0"/>
+                            <constraint firstAttribute="bottom" secondItem="jIU-jQ-Y0r" secondAttribute="bottom" constant="15" id="PqB-TL-S6M"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Byo-bp-YNv" secondAttribute="trailing" constant="5" id="QIu-yX-7JX"/>
+                            <constraint firstItem="jIU-jQ-Y0r" firstAttribute="height" secondItem="Byo-bp-YNv" secondAttribute="height" id="QxA-6s-Ghc"/>
+                            <constraint firstItem="9zo-tr-M5I" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="RDq-vl-pRW"/>
+                            <constraint firstItem="9zo-tr-M5I" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dgn-r8-Fp9"/>
+                            <constraint firstItem="jIU-jQ-Y0r" firstAttribute="width" secondItem="Byo-bp-YNv" secondAttribute="width" id="rV7-ep-S0p"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="chart" destination="9zo-tr-M5I" id="QOb-a0-6e7"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="117.59999999999999" y="123.68815592203899"/>
+        </scene>
+    </scenes>
+</document>
