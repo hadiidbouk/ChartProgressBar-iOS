@@ -1,4 +1,4 @@
-# ChartProgressBar-ios
+# ChartProgressBar-iOS
 
 Draw a chart with progress bar style
 
@@ -50,3 +50,7 @@ Add a UIView and set class name 'ChartProgressBar'
 3. `chart.removeClickedBar()` : Unselect the clicked bar.
 
 4. `isBarsEmpty()` : Check if bars values are empty.
+
+## Credits
+
+this library use [AlNistor](https://github.com/AlNistor/vertical-progress-bar-swift) sample to draw a single bar and [SwiftSVG](https://github.com/mchoe/SwiftSVG) to show and edit the svg pin.
