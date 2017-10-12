@@ -33,7 +33,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func removeValues(_ sender: Any) {
-        chart.removeBarValues()
+        chart.removeValues()
     }
     
     @IBAction func isBarsEmpty(_ sender: Any) {
@@ -46,7 +46,7 @@ class ViewController: UIViewController {
     }
     
     @IBAction func resetValues(_ sender: Any) {
-        chart.resetBarValues()
+        chart.resetValues()
     }
     
     @IBAction func removeClickedBar(_ sender: Any) {

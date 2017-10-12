@@ -162,7 +162,7 @@ class ChartProgressBar: UIView {
         This method remove all the values of the chart by setting the value 0 ,
         also it calls 'removeClickedBar()'.
      */
-    func removeBarValues() {
+    func removeValues() {
 
         removeClickedBar()
         
@@ -186,7 +186,7 @@ class ChartProgressBar: UIView {
     /*
      This method re-add all the values of the chart by setting the value from the BarData array.
      */
-    func resetBarValues() {
+    func resetValues() {
 
         var i = 0
         
