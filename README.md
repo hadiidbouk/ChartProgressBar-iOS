@@ -38,20 +38,20 @@ Add a UIView and set class name 'ChartProgressBar'
         chart.barsCanBeClick = true
         chart.maxValue = 10.0
         //chart.barWidth = 15
-	    //chart.barHeight = 180
-	    //chart.emptyColor = UIColor.init(hexString: "e0e0e0")
-	    //chart.progressColor = UIColor.init(hexString: "0086FF")
-	    //chart.progressClickColor = UIColor.init(hexString: "09467D")
-	    //chart.pinTxtColor = UIColor.white
-	    //chart.pinBackgroundColor = UIColor.darkGray
-	    //chart.barRadius = nil
-	    //chart.barTitleColor = UIColor.init(hexString: "598DBC")
-	    //chart.barTitleTxtSize = 12
-	    //chart.barTitleWidth = 30
-	    //chart.barTitleHeight = 25
-	    //chart.pinTxtSize = 10
-	    //chart.pinWidth = 30
-	    //chart.pinHeigh = 30
+	//chart.barHeight = 180
+	//chart.emptyColor = UIColor.init(hexString: "e0e0e0")
+	//chart.progressColor = UIColor.init(hexString: "0086FF")
+	//chart.progressClickColor = UIColor.init(hexString: "09467D")
+	//chart.pinTxtColor = UIColor.white
+	//chart.pinBackgroundColor = UIColor.darkGray
+	//chart.barRadius = 5
+	//chart.barTitleColor = UIColor.init(hexString: "598DBC")
+	//chart.barTitleTxtSize = 12
+	//chart.barTitleWidth = 30
+	//chart.barTitleHeight = 25
+	//chart.pinTxtSize = 10
+	//chart.pinWidth = 30
+	//chart.pinHeigh = 30
         chart.build()
     }
 ```
