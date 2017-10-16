@@ -8,7 +8,7 @@
 
 import Foundation
 
-public struct BarData {
+struct BarData {
 
     let barTitle: String
     let barValue: Float
