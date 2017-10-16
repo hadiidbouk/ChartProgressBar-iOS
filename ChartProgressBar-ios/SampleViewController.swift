@@ -10,26 +10,46 @@ import UIKit
 
 class SampleViewController: UIViewController {
 
+    @IBOutlet weak var chart: ChartProgressBar!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+        // Do any additional setup after loading the view, typically from a nib.
+        
+        var data: [BarData] = []
+        
+        data.append(BarData.init(barTitle: "Jan", barValue: 1.4, pinText: "1.4$"))
+        data.append(BarData.init(barTitle: "Feb", barValue: 10, pinText: "10$"))
+        data.append(BarData.init(barTitle: "Mar", barValue: 3.1, pinText: "3.1$"))
+        data.append(BarData.init(barTitle: "Apr", barValue: 4.8, pinText: "4.8$"))
+        data.append(BarData.init(barTitle: "May", barValue: 6.6, pinText: "6.6$"))
+        data.append(BarData.init(barTitle: "Jun", barValue: 7.4, pinText: "7.4$"))
+        data.append(BarData.init(barTitle: "Jul", barValue: 5.5, pinText: "5.5$"))
+        
+        chart.data = data
+        chart.barsCanBeClick = true
+        chart.maxValue = 10.0
+        chart.build()
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func removeValues(_ sender: Any) {
+        chart.removeValues()
     }
-    */
-
+    
+    @IBAction func isBarsEmpty(_ sender: Any) {
+        
+        let alert = UIAlertController(title: "Is bars Empty ?", message: "\(chart.isBarsEmpty())", preferredStyle: UIAlertControllerStyle.alert)
+        
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler: nil))
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @IBAction func resetValues(_ sender: Any) {
+        chart.resetValues()
+    }
+    
+    @IBAction func removeClickedBar(_ sender: Any) {
+        chart.removeClickedBar()
+    }
 }

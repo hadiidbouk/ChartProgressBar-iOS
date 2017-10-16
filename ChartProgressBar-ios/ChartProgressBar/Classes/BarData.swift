@@ -8,13 +8,13 @@
 
 import Foundation
 
-struct BarData {
+public struct BarData {
 
     let barTitle: String
     let barValue: Float
     let pinText: String
 
-    init(barTitle title: String,
+    public init(barTitle title: String,
          barValue value: Float,
          pinText textPin: String) {
 

@@ -7,28 +7,30 @@
 //
 
 import UIKit
+import SwiftSVG
 
+@available(iOS 9.0, *)
 public class ChartProgressBar: UIView {
 
-	var data: [BarData]?
-	var barWidth: Float = 15
-	var barHeight: Float = 180
-	var emptyColor: UIColor = UIColor.init(hexString: "e0e0e0")
-	var progressColor: UIColor = UIColor.init(hexString: "0086FF")
-	var progressClickColor: UIColor = UIColor.init(hexString: "09467D")
-	var pinTxtColor: UIColor = UIColor.white
-	var pinBackgroundColor: UIColor = UIColor.darkGray
-	var barRadius: Float? = nil
-	var barTitleColor: UIColor = UIColor.init(hexString: "598DBC")
-	var barTitleTxtSize: Float = 12
-	var barTitleWidth: Float = 30
-	var barTitleHeight: Float = 25
-	var pinTxtSize: Float = 10
-	var pinWidth: Float = 30
-	var pinHeight: Float = 30
-	var barsCanBeClick: Bool = false
+	public var data: [BarData]?
+	public var barWidth: Float = 15
+	public var barHeight: Float = 180
+	public var emptyColor: UIColor = UIColor.init(hexString: "e0e0e0")
+	public var progressColor: UIColor = UIColor.init(hexString: "0086FF")
+	public var progressClickColor: UIColor = UIColor.init(hexString: "09467D")
+	public var pinTxtColor: UIColor = UIColor.white
+	public var pinBackgroundColor: UIColor = UIColor.darkGray
+	public var barRadius: Float? = nil
+	public var barTitleColor: UIColor = UIColor.init(hexString: "598DBC")
+	public var barTitleTxtSize: Float = 12
+	public var barTitleWidth: Float = 30
+	public var barTitleHeight: Float = 25
+	public var pinTxtSize: Float = 10
+	public var pinWidth: Float = 30
+	public var pinHeight: Float = 30
+	public var barsCanBeClick: Bool = false
 	private var oldClickedBar: Bar?
-	var maxValue: Float = 100.0
+	public var maxValue: Float = 100.0
 	private var isDataEmpty: Bool = true
 
 	override init(frame: CGRect) {
@@ -42,7 +44,7 @@ public class ChartProgressBar: UIView {
 	/*  build the chart
         this method build the progress bar into a stackview
      */
-	func build() {
+	public func build() {
 
 		guard let chartData = data else {
 			return
@@ -162,7 +164,7 @@ public class ChartProgressBar: UIView {
         This method remove all the values of the chart by setting the value 0 ,
         also it calls 'removeClickedBar()'.
      */
-	func removeValues() {
+	public func removeValues() {
 
 		removeClickedBar()
 
@@ -186,7 +188,7 @@ public class ChartProgressBar: UIView {
 	/*
      This method re-add all the values of the chart by setting the value from the BarData array.
      */
-	func resetValues() {
+	public func resetValues() {
 
 		var i = 0
 
@@ -211,14 +213,14 @@ public class ChartProgressBar: UIView {
 	/*
      This method hide the pin and set the progress (and the title ) color to progresscolor.
      */
-	func removeClickedBar() {
+	public func removeClickedBar() {
 		setClick(on: oldClickedBar, isBarClicked: false)
 	}
 
 	/*
      This method return true if the values of the charts in 0 otherwise it will return false
      */
-	func isBarsEmpty() -> Bool {
+	public func isBarsEmpty() -> Bool {
 		return isDataEmpty
 	}
 
