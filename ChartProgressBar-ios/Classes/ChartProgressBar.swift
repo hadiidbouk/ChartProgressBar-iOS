@@ -251,7 +251,10 @@ public class ChartProgressBar: UIView {
 
 		newView.frame = CGRect(x: CGFloat(Float(bar.center.x) - Float(pinWidth / 2)), y: pinY, width: CGFloat(pinWidth), height: CGFloat(pinHeight))
 
-		let svgURL = Bundle.main.url(forResource: "pin", withExtension: "svg")!
+        let bundle = Bundle(for: ChartProgressBar.self)
+        
+        let svgURL = bundle.url(forResource: "pin", withExtension: "svg")!
+
 		CALayer(SVGURL: svgURL) { (svgLayer) in
 
 			svgLayer.resizeToFit(CGRect(x: 0, y: 0, width: CGFloat(self.pinWidth), height: CGFloat(self.pinHeight)))
