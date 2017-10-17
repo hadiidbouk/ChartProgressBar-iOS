@@ -25,6 +25,12 @@ Add a UIView and set class name 'ChartProgressBar'
 2. Add your Data to the chart :
 
 ```swift
+
+import UIKit
+import ChartProgressBar
+
+class ViewController: UIViewController {
+
 @IBOutlet weak var chart: ChartProgressBar!
 
     override func viewDidLoad() {
@@ -61,6 +67,7 @@ Add a UIView and set class name 'ChartProgressBar'
 	//chart.pinHeigh = 30
         chart.build()
     }
+  }
 ```
 
 ## Useful methods
