@@ -69,3 +69,5 @@ Add a UIView and set class name 'ChartProgressBar'
 ## Credits
 
 this library use [AlNistor](https://github.com/AlNistor/vertical-progress-bar-swift) sample to draw a single bar and [SwiftSVG](https://github.com/mchoe/SwiftSVG) to show and edit the svg pin.
+
+Thanks for [Simplexity](http://simplexity.io) that gave me time for doing this library.
