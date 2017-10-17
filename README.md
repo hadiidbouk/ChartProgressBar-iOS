@@ -6,8 +6,15 @@ Draw a chart with progress bar style - the android version [here](https://github
 
 ## Installation
 
-clone this repo for now.
-- it will be added to cocoapods
+// ios version (9.0,*)
+
+Using cocoapods : ```pod 'ChartProgressBar' ```
+
+(this pod will add SwiftSVG also)
+
+Or 
+
+Clone this repo and copy all the files
 
 ## Usage
 
