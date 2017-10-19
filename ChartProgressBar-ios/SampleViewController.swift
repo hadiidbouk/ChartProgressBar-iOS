@@ -1,10 +1,3 @@
-//
-//  SampleViewController.swift
-//  ChartProgressBar-ios
-//
-//  Created by Hadi Dbouk on 10/12/17.
-//  Copyright © 2017 Hadi Dbouk. All rights reserved.
-//
 
 import UIKit
 

@@ -1,10 +1,3 @@
-//
-//  ProgressBarView.swift
-//  vertical-progress-bar
-//
-//  Created by Alexandru Nistor on 11/10/16.
-//  Copyright © 2016 ASSIST-Software. All rights reserved.
-//  www.assist-software.net
 
 import UIKit
 
