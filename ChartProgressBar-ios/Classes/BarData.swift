@@ -3,9 +3,9 @@ import Foundation
 
 public struct BarData {
 
-    let barTitle: String
-    let barValue: Float
-    let pinText: String
+    public let barTitle: String
+    public let barValue: Float
+    public let pinText: String
 
     public init(barTitle title: String,
          barValue value: Float,
