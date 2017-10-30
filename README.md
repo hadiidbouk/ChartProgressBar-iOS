@@ -6,7 +6,7 @@ Draw a chart with progress bar style - the android version [here](https://github
 
 ## Installation
 
-// ios version (9.0,*)
+// ios version (9.0,*) - Swift 3.2
 
 Using cocoapods : ```pod 'ChartProgressBar' ```
 
