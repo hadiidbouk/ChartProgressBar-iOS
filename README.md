@@ -18,7 +18,8 @@ Clone this repo and copy all the files
 
 ## Usage
 
-Add a UIView and set class name 'ChartProgressBar'
+Add a UIView and set class name 'ChartProgressBar' ,
+set the width and the height of this UIView
 
 ![](https://i.imgur.com/l3utMxR.png)
 
