@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12121" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12089"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -22,12 +22,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9zo-tr-M5I">
-                                <rect key="frame" x="4.5" y="240" width="366" height="187"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9zo-tr-M5I" customClass="ChartProgressBar" customModule="ChartProgressBar_ios" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="240" width="375" height="187"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="187" id="IBm-pG-ekc"/>
-                                    <constraint firstAttribute="width" constant="366" id="RD9-vL-ogI"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Byo-bp-YNv">
@@ -75,7 +74,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.08235294118" green="0.35294117650000001" blue="0.72549019609999998" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Byo-bp-YNv" secondAttribute="bottom" constant="15" id="C9k-fd-5b5"/>
                             <constraint firstItem="jIU-jQ-Y0r" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="5" id="Lxg-Fj-tN0"/>
@@ -83,7 +82,9 @@
                             <constraint firstAttribute="trailingMargin" secondItem="Byo-bp-YNv" secondAttribute="trailing" constant="5" id="QIu-yX-7JX"/>
                             <constraint firstItem="jIU-jQ-Y0r" firstAttribute="height" secondItem="Byo-bp-YNv" secondAttribute="height" id="QxA-6s-Ghc"/>
                             <constraint firstItem="9zo-tr-M5I" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="RDq-vl-pRW"/>
+                            <constraint firstAttribute="trailing" secondItem="9zo-tr-M5I" secondAttribute="trailing" id="VtC-X9-l1E"/>
                             <constraint firstItem="9zo-tr-M5I" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dgn-r8-Fp9"/>
+                            <constraint firstItem="9zo-tr-M5I" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="nlJ-3a-Q7J"/>
                             <constraint firstItem="jIU-jQ-Y0r" firstAttribute="width" secondItem="Byo-bp-YNv" secondAttribute="width" id="rV7-ep-S0p"/>
                         </constraints>
                     </view>

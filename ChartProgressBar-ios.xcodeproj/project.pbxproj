@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		310D61B91F8E58EA0034F1EC /* pin.svg in Resources */ = {isa = PBXBuildFile; fileRef = 310D61B81F8E58EA0034F1EC /* pin.svg */; };
 		3115C0F11F8FFFC100138C6E /* BinaryFloatingPoint+ParseLengthString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3115C0C51F8FFFC000138C6E /* BinaryFloatingPoint+ParseLengthString.swift */; };
 		3115C0F21F8FFFC100138C6E /* CALayer+Sublayers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3115C0C61F8FFFC000138C6E /* CALayer+Sublayers.swift */; };
 		3115C0F31F8FFFC100138C6E /* CALayer+SVG.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3115C0C71F8FFFC000138C6E /* CALayer+SVG.swift */; };
@@ -80,7 +79,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		310D61B81F8E58EA0034F1EC /* pin.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = pin.svg; sourceTree = "<group>"; };
 		3115C0C51F8FFFC000138C6E /* BinaryFloatingPoint+ParseLengthString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "BinaryFloatingPoint+ParseLengthString.swift"; path = "SwiftSVG/BinaryFloatingPoint+ParseLengthString.swift"; sourceTree = "<group>"; };
 		3115C0C61F8FFFC000138C6E /* CALayer+Sublayers.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CALayer+Sublayers.swift"; path = "SwiftSVG/CALayer+Sublayers.swift"; sourceTree = "<group>"; };
 		3115C0C71F8FFFC000138C6E /* CALayer+SVG.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = "CALayer+SVG.swift"; path = "SwiftSVG/CALayer+SVG.swift"; sourceTree = "<group>"; };
@@ -229,7 +227,6 @@
 		314B17361F8E2F3200D98FA3 = {
 			isa = PBXGroup;
 			children = (
-				310D61B81F8E58EA0034F1EC /* pin.svg */,
 				314B17411F8E2F3200D98FA3 /* ChartProgressBar-ios */,
 				314B17401F8E2F3200D98FA3 /* Products */,
 			);
@@ -327,6 +324,7 @@
 				TargetAttributes = {
 					314B173E1F8E2F3200D98FA3 = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = DVU3J4CJD5;
 						ProvisioningStyle = Automatic;
 					};
 					314B17521F8E2F3200D98FA3 = {
@@ -366,7 +364,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				310D61B91F8E58EA0034F1EC /* pin.svg in Resources */,
 				314B174D1F8E2F3200D98FA3 /* LaunchScreen.storyboard in Resources */,
 				314B174A1F8E2F3200D98FA3 /* Assets.xcassets in Resources */,
 				314B17481F8E2F3200D98FA3 /* Main.storyboard in Resources */,
@@ -594,6 +591,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = DVU3J4CJD5;
 				INFOPLIST_FILE = "ChartProgressBar-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "beyondtec.ChartProgressBar-ios";
@@ -606,6 +604,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = DVU3J4CJD5;
 				INFOPLIST_FILE = "ChartProgressBar-ios/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "beyondtec.ChartProgressBar-ios";

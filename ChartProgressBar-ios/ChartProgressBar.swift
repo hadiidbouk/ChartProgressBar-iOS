@@ -13,12 +13,17 @@ public class ChartProgressBar: UIView {
 	var pinBackgroundColor: UIColor = UIColor.darkGray
 	var barRadius: Float? = nil
 	var barTitleColor: UIColor = UIColor.init(hexString: "598DBC")
+	var barTitleSelectedColor: UIColor = UIColor.init(hexString: "")
 	var barTitleTxtSize: Float = 12
 	var barTitleWidth: Float = 30
 	var barTitleHeight: Float = 25
+	var pinTitleFont: UIFont?
+	var barTitleFont: UIFont?
 	var pinTxtSize: Float = 10
 	var pinWidth: Float = 30
 	var pinHeight: Float = 30
+	var pinMarginBottom: Float = 0
+	var pinMarginTop: Float = 0
 	var barsCanBeClick: Bool = false
 	private var oldClickedBar: Bar?
 	var maxValue: Float = 100.0
@@ -37,12 +42,22 @@ public class ChartProgressBar: UIView {
      */
 	func build() {
 
+		if pinTitleFont == nil {
+			pinTitleFont = UIFont(name: "HelveticaNeue-bold", size: CGFloat(pinTxtSize))
+		}
+		
+		if barTitleFont == nil {
+			barTitleFont = UIFont(name: "HelveticaNeue-medium", size: CGFloat(barTitleTxtSize))
+		}
+		
 		guard let chartData = data else {
 			return
 		}
 
+		guard chartData.count != 0 else {
+			return
+		}
 
-		let width = CGFloat(barWidth) > self.frame.width ? self.frame.width : CGFloat(barWidth)
 		let height = CGFloat(barHeight) > self.frame.height ? self.frame.height : CGFloat(barHeight)
 
 		let stackView = UIStackView()
@@ -50,15 +65,18 @@ public class ChartProgressBar: UIView {
 		stackView.axis = UILayoutConstraintAxis.horizontal
 		stackView.distribution = UIStackViewDistribution.fillEqually
 
+		let barViewWidth = (self.frame.width).divided(by: (CGFloat)(chartData.count))
+
 		for barData in chartData {
 
-
 			let barView = UIView()
-			barView.frame = CGRect(x: 0, y: 0, width: width, height: height)
+			barView.frame = CGRect(x: 0, y: 0, width: 0, height: height)
 
 			let bar = Bar()
 
-			bar.frame = CGRect(x: barView.center.x + barView.frame.width / 2, y: 0, width: width, height: height)
+			let xBar = (barViewWidth / 2).subtracting(CGFloat(barWidth / 2))
+
+			bar.frame = CGRect(x: xBar, y: 0, width: CGFloat(barWidth), height: height)
 			bar.setBarRadius(radius: barRadius)
 			bar.initBar()
 			bar.setBackColor(emptyColor)
@@ -67,23 +85,28 @@ public class ChartProgressBar: UIView {
 
 			if barsCanBeClick {
 				let gesture = UITapGestureRecognizer(target: self, action: #selector (self.triggerBarClick(sender:)))
-				bar.addGestureRecognizer(gesture)
+				barView.addGestureRecognizer(gesture)
 			}
 
 			barView.addSubview(bar)
 
 			let barPinLbl = createPinLbl(text: barData.pinText)
-			let barPinView = createPinView(label: barPinLbl, progressBar: bar, progressValue: CGFloat(barData.barValue))
+			let barPinView = createPinView(label: barPinLbl,
+				progressBar: bar,
+				progressValue: CGFloat(barData.barValue))
 
 			barPinView.isHidden = true
 
 			barView.addSubview(barPinView)
 
-			let barTitleLbl = createBarTitleLbl(text: barData.barTitle, progressBar: bar)
+			let barTitleLbl = createBarTitleLbl(text: barData.barTitle,
+				progressBar: bar,
+				barFrame: xBar)
 
 			barView.addSubview(barTitleLbl)
 
 			stackView.addArrangedSubview(barView)
+
 		}
 		self.addSubview(stackView)
 
@@ -100,10 +123,17 @@ public class ChartProgressBar: UIView {
 			return
 		}
 
-		let bar = sender.view as? Bar
+		let barView = sender.view
+		guard let views = barView?.subviews else {
+			return
+		}
 
-		setClick(on: oldClickedBar, isBarClicked: false)
-		setClick(on: bar, isBarClicked: true)
+		for view in views {
+			if(view is Bar) {
+				setClick(on: oldClickedBar, isBarClicked: false)
+				setClick(on: view as? Bar, isBarClicked: true)
+			}
+		}
 	}
 
 	/*
@@ -127,26 +157,26 @@ public class ChartProgressBar: UIView {
 				subView.isHidden = !isClicked
 				oldClickedBar = bar
 			}
-				else if isBar {
+			else if isBar {
 
-					if isClicked {
-						bar?.setProgressColor(progressClickColor)
+				if isClicked {
+					bar?.setProgressColor(progressClickColor)
 
-					}
-						else {
-							bar?.setProgressColor(progressColor)
-					}
+				}
+				else {
+					bar?.setProgressColor(progressColor)
+				}
 			}
-				else if isLabel && subView.tag == 778877 {
+			else if isLabel && subView.tag == 778877 {
 
-					let lbl = subView as! UILabel
+				let lbl = subView as! UILabel
 
-					if isClicked {
-						lbl.textColor = progressClickColor
-					}
-						else {
-							lbl.textColor = barTitleColor
-					}
+				if isClicked {
+					lbl.textColor = barTitleSelectedColor
+				}
+				else {
+					lbl.textColor = barTitleColor
+				}
 			}
 		}
 	}
@@ -222,11 +252,11 @@ public class ChartProgressBar: UIView {
 	private func createPinLbl(text newText: String) -> UILabel {
 
 		let newLbl = UILabel()
-		newLbl.frame = CGRect(x: 0, y: -2, width: CGFloat(pinWidth), height: CGFloat(pinHeight))
+		newLbl.frame = CGRect(x: 0, y: 0, width: CGFloat(pinWidth), height: CGFloat(pinHeight))
 		newLbl.text = newText
 		newLbl.textAlignment = .center
 		newLbl.textColor = pinTxtColor
-		newLbl.font = UIFont(name: "HelveticaNeue-medium", size: CGFloat(pinTxtSize))
+		newLbl.font = pinTitleFont
 
 		return newLbl
 	}
@@ -238,35 +268,56 @@ public class ChartProgressBar: UIView {
 
 		let newView = UIView()
 
-		let pinY = (bar.frame.maxY - (value.multiplied(by: bar.frame.height)).divided(by: CGFloat(maxValue))).subtracting(CGFloat(pinHeight))
+		var pinY = (bar.frame.maxY - (value.multiplied(by: bar.frame.height)).divided(by: CGFloat(maxValue))).subtracting(CGFloat(pinHeight))
 
+		pinY = (pinY).adding(CGFloat(pinMarginTop))
+		pinY = (pinY).subtracting(CGFloat(pinMarginBottom))
+		
 		newView.frame = CGRect(x: CGFloat(Float(bar.center.x) - Float(pinWidth / 2)), y: pinY, width: CGFloat(pinWidth), height: CGFloat(pinHeight))
 
-		let svgURL = Bundle.main.url(forResource: "pin", withExtension: "svg")!
-		CALayer(SVGURL: svgURL) { (svgLayer) in
-
-			svgLayer.resizeToFit(CGRect(x: 0, y: 0, width: CGFloat(self.pinWidth), height: CGFloat(self.pinHeight)))
-			svgLayer.fillColor = self.pinBackgroundColor.cgColor
-
-			newView.layer.addSublayer(svgLayer)
-			newView.addSubview(lbl)
-		}
-
-
+		let bezierPath = UIBezierPath()
+		bezierPath.move(to: CGPoint(x: 56.95, y: 0))
+		bezierPath.addLine(to: CGPoint(x: 14.5, y: 0))
+		bezierPath.addCurve(to: CGPoint(x: 0, y: 14.5), controlPoint1: CGPoint(x: 6.49, y: 0), controlPoint2: CGPoint(x: 0, y: 6.49))
+		bezierPath.addCurve(to: CGPoint(x: 14.5, y: 29), controlPoint1: CGPoint(x: 0, y: 22.51), controlPoint2: CGPoint(x: 6.49, y: 29))
+		bezierPath.addLine(to: CGPoint(x: 29.82, y: 29))
+		bezierPath.addLine(to: CGPoint(x: 35.24, y: 34.02))
+		bezierPath.addCurve(to: CGPoint(x: 36.15, y: 34.28), controlPoint1: CGPoint(x: 35.49, y: 34.28), controlPoint2: CGPoint(x: 35.9, y: 34.54))
+		bezierPath.addLine(to: CGPoint(x: 41.66, y: 29))
+		bezierPath.addLine(to: CGPoint(x: 56.95, y: 29))
+		bezierPath.addCurve(to: CGPoint(x: 71.45, y: 14.5), controlPoint1: CGPoint(x: 64.96, y: 29), controlPoint2: CGPoint(x: 71.45, y: 22.51))
+		bezierPath.addCurve(to: CGPoint(x: 56.95, y: 0), controlPoint1: CGPoint(x: 71.45, y: 6.49), controlPoint2: CGPoint(x: 64.96, y: 0))
+		bezierPath.close()
+		pinBackgroundColor.setFill()
+		bezierPath.fill()
+		
+		let pinCALayer = CAShapeLayer()
+		pinCALayer.path = bezierPath.cgPath
+		pinCALayer.fillColor = pinBackgroundColor.cgColor
+		
+		newView.layer.addSublayer(pinCALayer)
+		newView.addSubview(lbl)
+		
 		return newView
 	}
 
 	/*
         This method create the bar title below the bar and get the text from the BarData array
      */
-	private func createBarTitleLbl(text newText: String, progressBar bar: Bar) -> UILabel {
+	private func createBarTitleLbl(text newText: String, progressBar bar: Bar, barFrame: CGFloat) -> UILabel {
 
 		let newLbl = UILabel()
-		newLbl.frame = CGRect(x: CGFloat(Float(bar.superview!.center.x)), y: bar.frame.maxY, width: CGFloat(barTitleWidth), height: CGFloat(barTitleHeight))
+
+		var x = barFrame
+		newLbl.frame = CGRect(x: x, y: bar.frame.maxY, width: CGFloat(barTitleWidth), height: CGFloat(barTitleHeight))
+
+		let labelx = newLbl.frame.origin.x
+		x = x.subtracting(labelx / 2)
+		newLbl.frame.origin.x = x
 		newLbl.text = newText
 		newLbl.textAlignment = .center
 		newLbl.textColor = barTitleColor
-		newLbl.font = UIFont(name: "HelveticaNeue-medium", size: CGFloat(barTitleTxtSize))
+		newLbl.font = barTitleFont
 		newLbl.tag = 778877
 
 		return newLbl
