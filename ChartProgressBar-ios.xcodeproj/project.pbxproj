@@ -59,6 +59,7 @@
 		316B424C1F8FE79C008A89DC /* BarData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316B42481F8FE79C008A89DC /* BarData.swift */; };
 		316B424D1F8FE79C008A89DC /* ChartProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316B42491F8FE79C008A89DC /* ChartProgressBar.swift */; };
 		31EDFA891F8FBB01000C41AF /* SampleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EDFA881F8FBB01000C41AF /* SampleViewController.swift */; };
+		EC7C3B5C200CF6990071CB5C /* ChartProgressBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EC7C3B5B200CF6990071CB5C /* ChartProgressBarDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -135,6 +136,7 @@
 		316B42481F8FE79C008A89DC /* BarData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BarData.swift; sourceTree = "<group>"; };
 		316B42491F8FE79C008A89DC /* ChartProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChartProgressBar.swift; sourceTree = "<group>"; tabWidth = 3; usesTabs = 1; };
 		31EDFA881F8FBB01000C41AF /* SampleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SampleViewController.swift; sourceTree = "<group>"; };
+		EC7C3B5B200CF6990071CB5C /* ChartProgressBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChartProgressBarDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +171,7 @@
 				316B42471F8FE79C008A89DC /* Bar.swift */,
 				316B42481F8FE79C008A89DC /* BarData.swift */,
 				316B42491F8FE79C008A89DC /* ChartProgressBar.swift */,
+				EC7C3B5B200CF6990071CB5C /* ChartProgressBarDelegate.swift */,
 			);
 			name = lib;
 			sourceTree = "<group>";
@@ -419,6 +422,7 @@
 				3115C1131F8FFFC100138C6E /* SVGPolygon.swift in Sources */,
 				3115C0FC1F8FFFC100138C6E /* FloatingPoint+DegreesRadians.swift in Sources */,
 				3115C0F71F8FFFC100138C6E /* Data+CacheKey.swift in Sources */,
+				EC7C3B5C200CF6990071CB5C /* ChartProgressBarDelegate.swift in Sources */,
 				31EDFA891F8FBB01000C41AF /* SampleViewController.swift in Sources */,
 				3115C0FD1F8FFFC100138C6E /* NSBezierPath+CrossPlatform.swift in Sources */,
 				3115C1091F8FFFC100138C6E /* SVGCircle.swift in Sources */,
