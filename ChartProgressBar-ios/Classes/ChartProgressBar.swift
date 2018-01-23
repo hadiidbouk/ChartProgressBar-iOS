@@ -3,29 +3,30 @@ import UIKit
 
 public class ChartProgressBar: UIView {
 	
-	public var data: [BarData]?
-	public var barWidth: Float = 15
-	public var barHeight: Float = 180
-	public var emptyColor: UIColor = UIColor.init(hexString: "e0e0e0")
-	public var progressColor: UIColor = UIColor.init(hexString: "0086FF")
-	public var progressDisableColor: UIColor = UIColor.init(hexString: "4bffffff")
-	public var progressClickColor: UIColor = UIColor.init(hexString: "09467D")
-	public var pinTxtColor: UIColor = UIColor.white
-	public var pinBackgroundColor: UIColor = UIColor.darkGray
-	public var barRadius: Float? = nil
-	public var barTitleColor: UIColor = UIColor.init(hexString: "598DBC")
-	public var barTitleSelectedColor: UIColor = UIColor.init(hexString: "FFFFFF")
-	public var barTitleTxtSize: Float = 12
-	public var barTitleWidth: Float = 30
-	public var barTitleHeight: Float = 25
-	public var pinTitleFont: UIFont?
-	public var barTitleFont: UIFont?
-	public var pinTxtSize: Float = 10
-	public var pinWidth: Float = 30
-	public var pinHeight: Float = 30
-	public var pinMarginBottom: Float = 0
-	public var pinMarginTop: Float = 0
-	public var barsCanBeClick: Bool = false
+	var data: [BarData]?
+	var barWidth: Float = 15
+	var barHeight: Float = 180
+	var emptyColor: UIColor = UIColor.init(hexString: "e0e0e0")
+	var progressColor: UIColor = UIColor.init(hexString: "0086FF")
+	var progressDisableColor: UIColor = UIColor.init(hexString: "4bffffff")
+	var progressClickColor: UIColor = UIColor.init(hexString: "09467D")
+	var pinTxtColor: UIColor = UIColor.white
+	var pinBackgroundColor: UIColor = UIColor.darkGray
+	var barRadius: Float? = nil
+	var barTitleColor: UIColor = UIColor.init(hexString: "598DBC")
+	var barTitleSelectedColor: UIColor = UIColor.init(hexString: "FFFFFF")
+	var barTitleTxtSize: Float = 12
+	var barTitleWidth: Float = 30
+	var barTitleHeight: Float = 25
+	var pinTitleFont: UIFont?
+	var barTitleFont: UIFont?
+	var pinTxtSize: Float = 10
+	var pinWidth: Float = 30
+	var pinHeight: Float = 30
+	var pinMarginBottom: Float = 0
+	var pinMarginTop: Float = 0
+	var barsCanBeClick: Bool = false
+	
 	private var oldClickedBar: Bar?
 	public var maxValue: Float = 100.0
 	private var isDataEmpty: Bool = true
