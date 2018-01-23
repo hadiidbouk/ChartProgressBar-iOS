@@ -1,12 +1,16 @@
 # ChartProgressBar-iOS
 
+[![MIT Licence](https://badges.frapsoft.com/os/mit/mit.svg?v=103)](https://github.com/hadiidbouk/ChartProgressBar-iOS/blob/master/LICENSE)
+
 Draw a chart with progress bar style - the android version [here](https://github.com/hadiidbouk/ChartProgressBar-Android)
 
 ![](https://i.imgur.com/bMB49fa.png)
 
 ## Installation
 
-iOS version (9.0,*) - Swift 3.2
+iOS version (9.0,*)
+
+Swift 3.2
 
 Using cocoapods : ```pod 'ChartProgressBar' ```
 
