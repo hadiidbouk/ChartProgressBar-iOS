@@ -2,18 +2,19 @@
 import UIKit
 
 public class ChartProgressBar: UIView {
-
+	
 	var data: [BarData]?
 	var barWidth: Float = 15
 	var barHeight: Float = 180
 	var emptyColor: UIColor = UIColor.init(hexString: "e0e0e0")
 	var progressColor: UIColor = UIColor.init(hexString: "0086FF")
+	var progressDisableColor: UIColor = UIColor.init(hexString: "4bffffff")
 	var progressClickColor: UIColor = UIColor.init(hexString: "09467D")
 	var pinTxtColor: UIColor = UIColor.white
 	var pinBackgroundColor: UIColor = UIColor.darkGray
 	var barRadius: Float? = nil
 	var barTitleColor: UIColor = UIColor.init(hexString: "598DBC")
-	var barTitleSelectedColor: UIColor = UIColor.init(hexString: "")
+	var barTitleSelectedColor: UIColor = UIColor.init(hexString: "FFFFFF")
 	var barTitleTxtSize: Float = 12
 	var barTitleWidth: Float = 30
 	var barTitleHeight: Float = 25
@@ -33,16 +34,16 @@ public class ChartProgressBar: UIView {
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 	}
-
+	
 	required public init?(coder aDecoder: NSCoder) {
 		super.init(coder: aDecoder)
 	}
-
+	
 	/*  build the chart
-        this method build the progress bar into a stackview
-     */
+	this method build the progress bar into a stackview
+	*/
 	func build() {
-
+		
 		if pinTitleFont == nil {
 			pinTitleFont = UIFont(name: "HelveticaNeue-bold", size: CGFloat(pinTxtSize))
 		}
@@ -54,81 +55,85 @@ public class ChartProgressBar: UIView {
 		guard let chartData = data else {
 			return
 		}
-
+		
 		guard chartData.count != 0 else {
 			return
 		}
-
+		
 		let height = CGFloat(barHeight) > self.frame.height ? self.frame.height : CGFloat(barHeight)
-
+		
 		let stackView = UIStackView()
 		stackView.frame = CGRect(x: 0, y: 0, width: self.frame.width, height: height)
 		stackView.axis = UILayoutConstraintAxis.horizontal
 		stackView.distribution = UIStackViewDistribution.fillEqually
-
-		let barViewWidth = (self.frame.width).divided(by: (CGFloat)(chartData.count))
-
+		
+		let barViewWidth = (self.frame.width) / (CGFloat(chartData.count))
+		
+		var i = 0
 		for barData in chartData {
-
+			
 			let barView = UIView()
 			barView.frame = CGRect(x: 0, y: 0, width: 0, height: height)
-
+			
 			let bar = Bar()
-
-			let xBar = (barViewWidth / 2).subtracting(CGFloat(barWidth / 2))
-
+			
+			bar.tag = i
+			i = i + 1
+			
+			let xBar = (barViewWidth / 2) - (CGFloat(barWidth / 2))
+			
 			bar.frame = CGRect(x: xBar, y: 0, width: CGFloat(barWidth), height: height)
 			bar.setBarRadius(radius: barRadius)
 			bar.initBar()
 			bar.setBackColor(emptyColor)
 			bar.setProgressColor(progressColor)
 			bar.setProgressValue(CGFloat(barData.barValue), threshold: CGFloat(maxValue))
-
+			
 			if barsCanBeClick {
 				let gesture = UITapGestureRecognizer(target: self, action: #selector (self.triggerBarClick(sender:)))
 				barView.addGestureRecognizer(gesture)
 			}
-
+			
 			barView.addSubview(bar)
-
+			
 			let barPinLbl = createPinLbl(text: barData.pinText)
 			let barPinView = createPinView(label: barPinLbl,
-				progressBar: bar,
-				progressValue: CGFloat(barData.barValue))
-
+													 progressBar: bar,
+													 progressValue: CGFloat(barData.barValue))
+			
 			barPinView.isHidden = true
-
+			
 			barView.addSubview(barPinView)
-
+			
 			let barTitleLbl = createBarTitleLbl(text: barData.barTitle,
-				progressBar: bar,
-				barFrame: xBar)
-
+															progressBar: bar,
+															barFrame: xBar)
+			
 			barView.addSubview(barTitleLbl)
-
+			
 			stackView.addArrangedSubview(barView)
-
+			
 		}
 		self.addSubview(stackView)
-
+		
 		isDataEmpty = false
 	}
-
+	
 	/*
-        This method handle the bar click 
-        for showing the pin and changing the bar color
-     */
+	This method handle the bar click
+	for showing the pin and changing the bar color
+	*/
 	@objc private func triggerBarClick(sender: UITapGestureRecognizer) {
-
+		
 		guard isDataEmpty == false else {
 			return
 		}
-
+		
 		let barView = sender.view
 		guard let views = barView?.subviews else {
 			return
 		}
-
+		
 		for view in views {
 			if(view is Bar) {
 				setClick(on: oldClickedBar, isBarClicked: false)
@@ -140,42 +145,77 @@ public class ChartProgressBar: UIView {
 			}
 		}
 	}
-
+	
 	/*
-     This is a helper method of 'triggerBarClick'
-     it taks the bar has been clicked ( or not ) and show/hide the pin
-     it will be used to hide the old bar also
-     */
+	Click a bar dynamically
+	*/
+	public func clickBar(index: Int) {
+		guard isDataEmpty == false else {
+			return
+		}
+		
+		let stackView = self.subviews[0] as? UIStackView
+		
+		if stackView == nil {
+			return
+		}
+		
+		guard let barsViews = stackView?.arrangedSubviews else { return }
+		
+		for i in 0...barsViews.count - 1 {
+			if i == index {
+				let barView = barsViews[i]
+				let views = barView.subviews
+				for view in views {
+					if(view is Bar) {
+						let bar = view as! Bar
+						setClick(on: oldClickedBar, isBarClicked: false)
+						if !bar.isDisabled {
+							setClick(on: bar, isBarClicked: true)
+							delegate?.ChartProgressBar(self, didSelectRowAt: bar.tag)
+						}
+					}
+				}
+				return
+			}
+		}
+	}
+	
+	/*
+	This is a helper method of 'triggerBarClick'
+	it taks the bar has been clicked ( or not ) and show/hide the pin
+	it will be used to hide the old bar also
+	*/
 	private func setClick(on bar: Bar?, isBarClicked isClicked: Bool) {
-
+		
 		guard let barView = bar?.superview else {
 			return
 		}
-
+		
 		for subView in barView.subviews {
-
+			
 			let isLabel = subView is UILabel
 			let isBar = subView is Bar
-
+			
 			if !isLabel && !isBar {
-
+				
 				subView.isHidden = !isClicked
 				oldClickedBar = bar
 			}
 			else if isBar {
-
+				
 				if isClicked {
 					bar?.setProgressColor(progressClickColor)
-
+					
 				}
 				else {
 					bar?.setProgressColor(progressColor)
 				}
 			}
 			else if isLabel && subView.tag == 778877 {
-
+				
 				let lbl = subView as! UILabel
-
+				
 				if isClicked {
 					lbl.textColor = barTitleSelectedColor
 				}
@@ -185,101 +225,157 @@ public class ChartProgressBar: UIView {
 			}
 		}
 	}
-
+	
 	/*
-        This method remove all the values of the chart by setting the value 0 ,
-        also it calls 'removeClickedBar()'.
-     */
+	This method remove all the values of the chart by setting the value 0 ,
+	also it calls 'removeClickedBar()'.
+	*/
 	func removeValues() {
-
+		
 		removeClickedBar()
-
+		
 		let stackView = self.subviews[0]
-
+		
 		for barView in stackView.subviews {
-
+			
 			for subView in barView.subviews {
-
+				
 				if subView is Bar {
-
+					
 					let bar = subView as! Bar
 					bar.setProgressValue(0, threshold: CGFloat(maxValue))
 				}
-
+				
 			}
 		}
 		isDataEmpty = true
 	}
-
+	
 	/*
-     This method re-add all the values of the chart by setting the value from the BarData array.
-     */
+	This method re-add all the values of the chart by setting the value from the BarData array.
+	*/
 	func resetValues() {
-
+		
 		var i = 0
-
+		
 		let stackView = self.subviews[0]
-
+		
 		for barView in stackView.subviews {
-
+			
 			for subView in barView.subviews {
-
+				
 				if subView is Bar {
-
+					
 					let bar = subView as! Bar
 					bar.setProgressValue(CGFloat(data![i].barValue), threshold: CGFloat(maxValue))
 					i = i + 1
 				}
-
+				
 			}
 		}
 		isDataEmpty = false
 	}
-
+	
 	/*
-     This method hide the pin and set the progress (and the title ) color to progresscolor.
-     */
+	This method hide the pin and set the progress (and the title ) color to progresscolor.
+	*/
 	func removeClickedBar() {
 		setClick(on: oldClickedBar, isBarClicked: false)
 	}
-
+	
 	/*
-     This method return true if the values of the charts in 0 otherwise it will return false
-     */
+	This method return true if the values of the charts in 0 otherwise it will return false
+	*/
 	func isBarsEmpty() -> Bool {
 		return isDataEmpty
 	}
-
-
+	
 	/*
-     This method create the pin lbl and set the text from the BarData array
-     */
+	Disable a bar ( change color and remove gesture)
+	*/
+	func disableBar(at index: Int) {
+		var stackView: UIStackView? = nil
+		self.subviews.forEach {
+			if $0 is UIStackView {
+				stackView = $0 as? UIStackView
+			}
+		}
+		guard let barView = stackView?.arrangedSubviews[index] else {
+			return
+		}
+		barView.gestureRecognizers?.removeAll()
+		barView.subviews.forEach {
+			if $0 is Bar {
+				let bar = $0 as? Bar
+				bar?.isDisabled = true
+				bar?.setProgressColor(progressDisableColor)
+			}
+			else if $0 is UILabel {
+				let titleBar = $0 as? UILabel
+				titleBar?.textColor = progressDisableColor
+			}
+		}
+	}
+	
+	/*
+	Enable a bar ( change color and remove gesture)
+	*/
+	func enableBar(at index: Int) {
+		var stackView: UIStackView? = nil
+		self.subviews.forEach {
+			if $0 is UIStackView {
+				stackView = $0 as? UIStackView
+			}
+		}
+		guard let barView = stackView?.arrangedSubviews[index] else {
+			return
+		}
+		
+		let gesture = UITapGestureRecognizer(target: self, action: #selector (self.triggerBarClick(sender:)))
+		barView.addGestureRecognizer(gesture)
+		
+		barView.subviews.forEach {
+			if $0 is Bar {
+				let bar = $0 as? Bar
+				bar?.isDisabled = false
+				bar?.setProgressColor(progressColor)
+			}
+			else if $0 is UILabel {
+				let titleBar = $0 as? UILabel
+				titleBar?.textColor = barTitleColor
+			}
+		}
+	}
+	
+	/*
+	This method create the pin lbl and set the text from the BarData array
+	*/
 	private func createPinLbl(text newText: String) -> UILabel {
-
+		
 		let newLbl = UILabel()
 		newLbl.frame = CGRect(x: 0, y: 0, width: CGFloat(pinWidth), height: CGFloat(pinHeight))
 		newLbl.text = newText
 		newLbl.textAlignment = .center
 		newLbl.textColor = pinTxtColor
 		newLbl.font = pinTitleFont
-
+		
 		return newLbl
 	}
-
+	
 	/*
-     This method create the pin view by getting the image from the bundle as an SVG using `SwiftSVG`(https://github.com/mchoe/SwiftSVG) library and adding the created label in the above method to it.
-     */
+	This method create the pin view by getting the image from the bundle as an SVG using `SwiftSVG`(https://github.com/mchoe/SwiftSVG) library and adding the created label in the above method to it.
+	*/
 	private func createPinView(label lbl: UILabel, progressBar bar: Bar, progressValue value: CGFloat) -> UIView {
-
-		let newView = UIView()
-
-		var pinY = (bar.frame.maxY - (value.multiplied(by: bar.frame.height)).divided(by: CGFloat(maxValue))).subtracting(CGFloat(pinHeight))
-
-		pinY = (pinY).adding(CGFloat(pinMarginTop))
-		pinY = (pinY).subtracting(CGFloat(pinMarginBottom))
 		
-		newView.frame = CGRect(x: CGFloat(Float(bar.center.x) - Float(pinWidth / 2)), y: pinY, width: CGFloat(pinWidth), height: CGFloat(pinHeight))
-
+		let newView = UIView()
+		
+		var pinY = bar.frame.maxY - ((value * bar.frame.height) / CGFloat(maxValue)) - CGFloat(pinHeight)
+		
+		pinY = (pinY) + (CGFloat(pinMarginTop))
+		pinY = (pinY) - (CGFloat(pinMarginBottom))
+		
+		newView.frame = CGRect(x: CGFloat(Float(bar.center.x) - Float(pinWidth / 2)) - 1, y: pinY, width: CGFloat(pinWidth), height: CGFloat(pinHeight))
+		
 		let bezierPath = UIBezierPath()
 		bezierPath.move(to: CGPoint(x: 56.95, y: 0))
 		bezierPath.addLine(to: CGPoint(x: 14.5, y: 0))
@@ -305,26 +401,26 @@ public class ChartProgressBar: UIView {
 		
 		return newView
 	}
-
+	
 	/*
-        This method create the bar title below the bar and get the text from the BarData array
-     */
+	This method create the bar title below the bar and get the text from the BarData array
+	*/
 	private func createBarTitleLbl(text newText: String, progressBar bar: Bar, barFrame: CGFloat) -> UILabel {
-
+		
 		let newLbl = UILabel()
-
+		
 		var x = barFrame
 		newLbl.frame = CGRect(x: x, y: bar.frame.maxY, width: CGFloat(barTitleWidth), height: CGFloat(barTitleHeight))
-
+		
 		let labelx = newLbl.frame.origin.x
-		x = x.subtracting(labelx / 2)
+		x = x - (labelx / 2)
 		newLbl.frame.origin.x = x
 		newLbl.text = newText
 		newLbl.textAlignment = .center
 		newLbl.textColor = barTitleColor
 		newLbl.font = barTitleFont
 		newLbl.tag = 778877
-
+		
 		return newLbl
 	}
 }

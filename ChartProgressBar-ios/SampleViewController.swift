@@ -41,6 +41,11 @@ class SampleViewController: UIViewController, ChartProgressBarDelegate {
         chart.pinTxtSize = 17
         chart.delegate = self
         chart.build()
+        chart.disableBar(at: 3)
+        let when = DispatchTime.now() + 6 // change 2 to desired number of seconds
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            self.chart.enableBar(at: 3)
+        }
     }
 
     @IBAction func removeValues(_ sender: Any) {
