@@ -7,7 +7,7 @@ public struct BarData {
     public let barValue: Float
     public let pinText: String
 
-    public init(barTitle title: String,
+    init(barTitle title: String,
          barValue value: Float,
          pinText textPin: String) {
 
