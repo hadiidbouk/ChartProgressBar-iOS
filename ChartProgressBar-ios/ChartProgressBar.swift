@@ -28,7 +28,8 @@ public class ChartProgressBar: UIView {
 	private var oldClickedBar: Bar?
 	var maxValue: Float = 100.0
 	private var isDataEmpty: Bool = true
-
+	var delegate: ChartProgressBarDelegate?
+	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
 	}
@@ -131,7 +132,11 @@ public class ChartProgressBar: UIView {
 		for view in views {
 			if(view is Bar) {
 				setClick(on: oldClickedBar, isBarClicked: false)
-				setClick(on: view as? Bar, isBarClicked: true)
+				let bar = view as? Bar
+				setClick(on: bar, isBarClicked: true)
+				if bar != nil {
+					delegate?.ChartProgressBar(self, didSelectRowAt: bar!.tag)
+				}
 			}
 		}
 	}
