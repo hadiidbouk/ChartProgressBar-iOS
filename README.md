@@ -2,15 +2,15 @@
 
 Draw a chart with progress bar style - the android version [here](https://github.com/hadiidbouk/ChartProgressBar-Android)
 
-![](https://i.imgur.com/ppZiu4s.png)
+![](https://i.imgur.com/bMB49fa.png)
 
 ## Installation
 
-// ios version (9.0,*) - Swift 3.2
+iOS version (9.0,*) - Swift 3.2
 
 Using cocoapods : ```pod 'ChartProgressBar' ```
 
-(this pod will add SwiftSVG also)
+![](https://cocoapod-badges.herokuapp.com/v/ChartProgressBar/$VERSION/badge.png)
 
 Or 
 
@@ -30,7 +30,7 @@ set the width and the height of this UIView
 import UIKit
 import ChartProgressBar
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, ChartProgressBarDelegate {
 
 @IBOutlet weak var chart: ChartProgressBar!
 
@@ -40,33 +40,43 @@ class ViewController: UIViewController {
 
         var data: [BarData] = []
 
-        data.append(BarData.init(barTitle: "Jan", barValue: 1.4, pinText: "1.4$"))
-        data.append(BarData.init(barTitle: "Feb", barValue: 10, pinText: "10$"))
-        data.append(BarData.init(barTitle: "Mar", barValue: 3.1, pinText: "3.1$"))
-        data.append(BarData.init(barTitle: "Apr", barValue: 4.8, pinText: "4.8$"))
-        data.append(BarData.init(barTitle: "May", barValue: 6.6, pinText: "6.6$"))
-        data.append(BarData.init(barTitle: "Jun", barValue: 7.4, pinText: "7.4$"))
-        data.append(BarData.init(barTitle: "Jul", barValue: 5.5, pinText: "5.5$"))
+        data.append(BarData.init(barTitle: "Jan", barValue: 1.4, pinText: "1.4 €"))
+        data.append(BarData.init(barTitle: "Feb", barValue: 10, pinText: "10 €"))
+        data.append(BarData.init(barTitle: "Mar", barValue: 3.1, pinText: "3.1 €"))
+        data.append(BarData.init(barTitle: "Apr", barValue: 4.8, pinText: "4.8 €"))
+        data.append(BarData.init(barTitle: "May", barValue: 6.6, pinText: "6.6 €"))
+        data.append(BarData.init(barTitle: "Jun", barValue: 7.4, pinText: "7.4 €"))
+        data.append(BarData.init(barTitle: "Jul", barValue: 5.5, pinText: "5.5 €"))
 
         chart.data = data
         chart.barsCanBeClick = true
         chart.maxValue = 10.0
-        //chart.barWidth = 15
-	//chart.barHeight = 180
-	//chart.emptyColor = UIColor.init(hexString: "e0e0e0")
-	//chart.progressColor = UIColor.init(hexString: "0086FF")
-	//chart.progressClickColor = UIColor.init(hexString: "09467D")
-	//chart.pinTxtColor = UIColor.white
-	//chart.pinBackgroundColor = UIColor.darkGray
-	//chart.barRadius = 5
-	//chart.barTitleColor = UIColor.init(hexString: "598DBC")
-	//chart.barTitleTxtSize = 12
-	//chart.barTitleWidth = 30
-	//chart.barTitleHeight = 25
-	//chart.pinTxtSize = 10
-	//chart.pinWidth = 30
-	//chart.pinHeigh = 30
+        chart.emptyColor = UIColor.clear
+        chart.barWidth = 7
+        chart.progressColor = UIColor.init(hexString: "99ffffff")
+        chart.progressClickColor = UIColor.init(hexString: "F2912C")
+        chart.pinBackgroundColor = UIColor.init(hexString: "E2335E")
+        chart.pinTxtColor = UIColor.init(hexString: "ffffff")
+        chart.barTitleColor = UIColor.init(hexString: "B6BDD5")
+        chart.barTitleSelectedColor = UIColor.init(hexString: "FFFFFF")
+        chart.pinMarginBottom = 15
+        chart.pinWidth = 70
+        chart.pinHeight = 29
+        chart.pinTxtSize = 17
+        chart.delegate = self
         chart.build()
+	
+        chart.disableBar(at: 3)
+	
+	let when = DispatchTime.now() + 6 // change 2 to desired number of seconds
+        DispatchQueue.main.asyncAfter(deadline: when) {
+            self.chart.enableBar(at: 3)
+        }
+    }
+    
+    //Delegate method to get the selected bar index
+    func ChartProgressBar(_ chartProgressBar: ChartProgressBar, didSelectRowAt rowIndex: Int) {
+        print(rowIndex)
     }
   }
 ```
@@ -81,8 +91,14 @@ class ViewController: UIViewController {
 
 4. `isBarsEmpty()` : Check if bars values are empty.
 
+5. `chart.disableBar(at: Int)` : Disable a bar progmatically.
+
+6. `chart.enableBar(at: Int)` : Enable a bar progmatically.
+
+7. `clickBar(index: Int)` : Click a bar progmatically.
+
 ## Credits
 
-this library use [AlNistor](https://github.com/AlNistor/vertical-progress-bar-swift) sample to draw a single bar and [SwiftSVG](https://github.com/mchoe/SwiftSVG) to show and edit the svg pin.
+this library use [AlNistor](https://github.com/AlNistor/vertical-progress-bar-swift) sample to draw a single bar.
 
 Thanks for [Simplexity](http://simplexity.io) that gave me time for doing this library.
