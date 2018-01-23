@@ -3,7 +3,7 @@ import UIKit
 
 public class ChartProgressBar: UIView {
 	
-	zvar data: [BarData]?
+	var data: [BarData]?
 	var barWidth: Float = 15
 	var barHeight: Float = 180
 	var emptyColor: UIColor = UIColor.init(hexString: "e0e0e0")
@@ -26,10 +26,11 @@ public class ChartProgressBar: UIView {
 	var pinMarginBottom: Float = 0
 	var pinMarginTop: Float = 0
 	var barsCanBeClick: Bool = false
+	
 	private var oldClickedBar: Bar?
-	var maxValue: Float = 100.0
+	public var maxValue: Float = 100.0
 	private var isDataEmpty: Bool = true
-	var delegate: ChartProgressBarDelegate?
+	public var delegate: ChartProgressBarDelegate?
 	
 	override init(frame: CGRect) {
 		super.init(frame: frame)
@@ -42,7 +43,7 @@ public class ChartProgressBar: UIView {
 	/*  build the chart
 	this method build the progress bar into a stackview
 	*/
-	func build() {
+	public func build() {
 		
 		if pinTitleFont == nil {
 			pinTitleFont = UIFont(name: "HelveticaNeue-bold", size: CGFloat(pinTxtSize))
@@ -230,7 +231,7 @@ public class ChartProgressBar: UIView {
 	This method remove all the values of the chart by setting the value 0 ,
 	also it calls 'removeClickedBar()'.
 	*/
-	func removeValues() {
+	public func removeValues() {
 		
 		removeClickedBar()
 		
@@ -254,7 +255,7 @@ public class ChartProgressBar: UIView {
 	/*
 	This method re-add all the values of the chart by setting the value from the BarData array.
 	*/
-	func resetValues() {
+	public func resetValues() {
 		
 		var i = 0
 		
@@ -279,21 +280,21 @@ public class ChartProgressBar: UIView {
 	/*
 	This method hide the pin and set the progress (and the title ) color to progresscolor.
 	*/
-	func removeClickedBar() {
+	public func removeClickedBar() {
 		setClick(on: oldClickedBar, isBarClicked: false)
 	}
 	
 	/*
 	This method return true if the values of the charts in 0 otherwise it will return false
 	*/
-	func isBarsEmpty() -> Bool {
+	public func isBarsEmpty() -> Bool {
 		return isDataEmpty
 	}
 	
 	/*
 	Disable a bar ( change color and remove gesture)
 	*/
-	func disableBar(at index: Int) {
+	public func disableBar(at index: Int) {
 		var stackView: UIStackView? = nil
 		self.subviews.forEach {
 			if $0 is UIStackView {
@@ -320,7 +321,7 @@ public class ChartProgressBar: UIView {
 	/*
 	Enable a bar ( change color and remove gesture)
 	*/
-	func enableBar(at index: Int) {
+	public func enableBar(at index: Int) {
 		var stackView: UIStackView? = nil
 		self.subviews.forEach {
 			if $0 is UIStackView {
