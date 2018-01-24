@@ -1,0 +1,6 @@
+framework module ChartProgressBar {
+  umbrella header "ChartProgressBar-umbrella.h"
+
+  export *
+  module * { export * }
+}
