@@ -1,11 +1,11 @@
 PODS:
-  - ChartProgressBar (1.0.2)
+  - ChartProgressBar (1.0.4)
 
 DEPENDENCIES:
   - ChartProgressBar
 
 SPEC CHECKSUMS:
-  ChartProgressBar: faf788924ee2da6836448985e05695c83d326fe1
+  ChartProgressBar: 1fe24fc286de1a3a8d02dcbdf6bc779c8e85865b
 
 PODFILE CHECKSUM: 11a74ace8c84f44a573e5ea9bcf5124c03e31747
 
