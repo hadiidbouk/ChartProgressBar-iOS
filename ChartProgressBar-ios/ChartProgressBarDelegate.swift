@@ -8,6 +8,6 @@
 
 import Foundation
 
-protocol ChartProgressBarDelegate {
+public protocol ChartProgressBarDelegate {
     func ChartProgressBar(_ chartProgressBar: ChartProgressBar, didSelectRowAt rowIndex: Int)
 }
